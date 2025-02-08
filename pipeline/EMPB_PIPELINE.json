@@ -49,7 +49,7 @@
 						"referenceName": "Dynamic_Table",
 						"type": "DatasetReference",
 						"parameters": {
-							"Table_Name": "TBL_C"
+							"Table_Name": "TBL_B"
 						}
 					}
 				]
