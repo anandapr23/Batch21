@@ -1,0 +1,11 @@
+{
+	"name": "KVazure",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-batch21.vault.azure.net/"
+		}
+	}
+}

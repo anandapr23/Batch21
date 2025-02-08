@@ -1,0 +1,6 @@
+{
+	"name": "OnPremises-SQL-Server",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

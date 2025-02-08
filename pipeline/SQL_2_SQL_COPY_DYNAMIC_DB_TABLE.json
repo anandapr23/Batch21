@@ -1,0 +1,90 @@
+{
+	"name": "SQL_2_SQL_COPY_DYNAMIC_DB_TABLE",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Dynamic_DB_N_TBL",
+						"type": "DatasetReference",
+						"parameters": {
+							"db_Name": {
+								"value": "@pipeline().parameters.Input_db_Name",
+								"type": "Expression"
+							},
+							"tbl_Name": {
+								"value": "@pipeline().parameters.Input_tbl_Name",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Dynamic_DB_N_TBL",
+						"type": "DatasetReference",
+						"parameters": {
+							"db_Name": {
+								"value": "@pipeline().parameters.Output_db_Name",
+								"type": "Expression"
+							},
+							"tbl_Name": {
+								"value": "@pipeline().parameters.Output_tbl_Name",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"Input_db_Name": {
+				"type": "string"
+			},
+			"Input_tbl_Name": {
+				"type": "string"
+			},
+			"Output_db_Name": {
+				"type": "string"
+			},
+			"Output_tbl_Name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-02-01T03:53:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

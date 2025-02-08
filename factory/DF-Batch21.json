@@ -1,0 +1,9 @@
+{
+	"name": "DF-Batch21",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "aadbf27b-3140-4de7-8067-732f20038f78",
+		"tenantId": "d3054dc8-fe0f-4d2f-8b0a-4037ee690a79"
+	}
+}

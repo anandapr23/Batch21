@@ -1,0 +1,34 @@
+{
+	"name": "Dynamic_DB_N_TBL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_PARAM_DB",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"db_Name": {
+					"value": "@dataset().db_Name",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"db_Name": {
+				"type": "String"
+			},
+			"tbl_Name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DBO",
+			"table": {
+				"value": "@dataset().tbl_Name",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
