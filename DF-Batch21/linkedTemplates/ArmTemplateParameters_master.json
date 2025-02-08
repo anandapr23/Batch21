@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DF-Batch21"
+		},
+		"LS_BLOB_connectionString": {
+			"value": ""
+		},
+		"LS_BLOB_KV_connectionString": {
+			"value": "DefaultEndpointsProtocol=https;AccountName=adlsbatch21;"
+		},
+		"LS_SQL_password": {
+			"value": ""
+		},
+		"LS_SQL_PARAM_DB_password": {
+			"value": ""
+		},
+		"KVazure_properties_typeProperties_baseUrl": {
+			"value": "https://kv-batch21.vault.azure.net/"
+		},
+		"LS_SQL_properties_typeProperties_server": {
+			"value": "sqlserverbatch21.database.windows.net"
+		},
+		"LS_SQL_properties_typeProperties_database": {
+			"value": "sqldbbatch21"
+		},
+		"LS_SQL_properties_typeProperties_userName": {
+			"value": "anand"
+		},
+		"LS_SQL_KV_properties_typeProperties_server": {
+			"value": "sqlserverbatch21.database.windows.net"
+		},
+		"LS_SQL_KV_properties_typeProperties_database": {
+			"value": "sqldbbatch21"
+		},
+		"LS_SQL_KV_properties_typeProperties_userName": {
+			"value": "anand"
+		},
+		"LS_SQL_PARAM_DB_properties_typeProperties_server": {
+			"value": "sqlserverbatch21.database.windows.net"
+		},
+		"LS_SQL_PARAM_DB_properties_typeProperties_database": {
+			"value": "@{linkedService().db_Name}"
+		},
+		"LS_SQL_PARAM_DB_properties_typeProperties_userName": {
+			"value": "anand"
+		},
+		"NEW_Tumb_trigger_properties_pipeline_parameters_Window_Start_Time": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"NEW_Tumb_trigger_properties_pipeline_parameters_Window_End_Time": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"event_trigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/9406049f-66d8-456c-96fa-fbe0957e9fb7/resourceGroups/RG-BATCH21/providers/Microsoft.Storage/storageAccounts/adlsbatch21"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

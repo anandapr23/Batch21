@@ -1,0 +1,202 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DF-Batch21"
+		},
+		"LS_BLOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BLOB'"
+		},
+		"LS_BLOB_KV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BLOB_KV'",
+			"defaultValue": "DefaultEndpointsProtocol=https;AccountName=adlsbatch21;"
+		},
+		"LS_SQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQL'"
+		},
+		"LS_SQL_PARAM_DB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQL_PARAM_DB'"
+		},
+		"KVazure_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-batch21.vault.azure.net/"
+		},
+		"LS_SQL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserverbatch21.database.windows.net"
+		},
+		"LS_SQL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqldbbatch21"
+		},
+		"LS_SQL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "anand"
+		},
+		"LS_SQL_KV_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserverbatch21.database.windows.net"
+		},
+		"LS_SQL_KV_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqldbbatch21"
+		},
+		"LS_SQL_KV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "anand"
+		},
+		"LS_SQL_PARAM_DB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserverbatch21.database.windows.net"
+		},
+		"LS_SQL_PARAM_DB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().db_Name}"
+		},
+		"LS_SQL_PARAM_DB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "anand"
+		},
+		"NEW_Tumb_trigger_properties_pipeline_parameters_Window_Start_Time": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"NEW_Tumb_trigger_properties_pipeline_parameters_Window_End_Time": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"event_trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/9406049f-66d8-456c-96fa-fbe0957e9fb7/resourceGroups/RG-BATCH21/providers/Microsoft.Storage/storageAccounts/adlsbatch21"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "DF-Batch21_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_BLOB_connectionString": {
+						"value": "[parameters('LS_BLOB_connectionString')]"
+					},
+					"LS_SQL_password": {
+						"value": "[parameters('LS_SQL_password')]"
+					},
+					"LS_SQL_PARAM_DB_password": {
+						"value": "[parameters('LS_SQL_PARAM_DB_password')]"
+					},
+					"KVazure_properties_typeProperties_baseUrl": {
+						"value": "[parameters('KVazure_properties_typeProperties_baseUrl')]"
+					},
+					"LS_SQL_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_server')]"
+					},
+					"LS_SQL_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_database')]"
+					},
+					"LS_SQL_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_userName')]"
+					},
+					"LS_SQL_PARAM_DB_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_PARAM_DB_properties_typeProperties_server')]"
+					},
+					"LS_SQL_PARAM_DB_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_PARAM_DB_properties_typeProperties_database')]"
+					},
+					"LS_SQL_PARAM_DB_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_PARAM_DB_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "DF-Batch21_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_BLOB_KV_connectionString": {
+						"value": "[parameters('LS_BLOB_KV_connectionString')]"
+					},
+					"LS_SQL_KV_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_KV_properties_typeProperties_server')]"
+					},
+					"LS_SQL_KV_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_KV_properties_typeProperties_database')]"
+					},
+					"LS_SQL_KV_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_KV_properties_typeProperties_userName')]"
+					},
+					"NEW_Tumb_trigger_properties_pipeline_parameters_Window_Start_Time": {
+						"value": "[parameters('NEW_Tumb_trigger_properties_pipeline_parameters_Window_Start_Time')]"
+					},
+					"NEW_Tumb_trigger_properties_pipeline_parameters_Window_End_Time": {
+						"value": "[parameters('NEW_Tumb_trigger_properties_pipeline_parameters_Window_End_Time')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-Batch21_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "DF-Batch21_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"event_trigger_properties_typeProperties_scope": {
+						"value": "[parameters('event_trigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-Batch21_ArmTemplate_1')]"
+			]
+		}
+	]
+}
