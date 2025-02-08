@@ -7,6 +7,12 @@
 			},
 			"DatabaseName": {
 				"type": "String"
+			},
+			"userName": {
+				"type": "string"
+			},
+			"password": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -17,14 +23,17 @@
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
-			"userName": "anand",
+			"userName": "@{linkedService().userName}",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
 					"referenceName": "KVazure",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "sqlpassword"
+				"secretName": {
+					"value": "@linkedService().password",
+					"type": "Expression"
+				}
 			}
 		}
 	}
