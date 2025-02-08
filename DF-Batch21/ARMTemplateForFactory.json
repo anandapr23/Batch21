@@ -430,6 +430,8 @@
 					{
 						"name": "Web1",
 						"type": "WebActivity",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -443,11 +445,19 @@
 							"method": "POST",
 							"headers": {},
 							"url": "https://management.azure.com/subscriptions/9406049f-66d8-456c-96fa-fbe0957e9fb7/resourceGroups/RG-KRISHNA-PRACTICE1/providers/Microsoft.DataFactory/factories/DF-KRISHNA-PRACTICE/pipelines/RESTAPI/createRun?api-version=2018-06-01",
-							"body": {},
 							"authentication": {
 								"type": "MSI",
 								"resource": "https://management.azure.com/"
 							}
+						}
+					},
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
 						}
 					}
 				],
