@@ -1,0 +1,133 @@
+{
+	"name": "Medalion_Architecture",
+	"properties": {
+		"activities": [
+			{
+				"name": "Source_2_bronze_copy",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "Input",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Dynamic_Folder",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container_Name": "storedata",
+							"Folder_Name": "Input"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Dynamic_Parquet_File",
+						"type": "DatasetReference",
+						"parameters": {
+							"ContainerName": "bronze",
+							"FolderName": "combined_storedata",
+							"FileName": {
+								"value": "@concat('combined_storedata_',formatDateTime(utcNow(),'yyyy-MM-dd'),'.parquet')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Bronze_2_Silver",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Source_2_bronze_copy",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/srikrishna.pandala@gmail.com/Bronze_2_Silver"
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_DBS",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Silver_2_Gold",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Bronze_2_Silver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/srikrishna.pandala@gmail.com/Silver_2_Gold"
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_DBS",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
